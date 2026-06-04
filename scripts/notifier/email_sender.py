@@ -7,8 +7,16 @@ from email.mime.text import MIMEText
 import markdown
 
 
-SMTP_HOST = "smtp.gmail.com"
-SMTP_PORT = 587
+SMTP_PROVIDERS = {
+    "naver.com": ("smtp.naver.com", 587),
+    "gmail.com": ("smtp.gmail.com", 587),
+}
+SMTP_DEFAULT = ("smtp.gmail.com", 587)
+
+
+def _get_smtp_settings(sender: str) -> tuple[str, int]:
+    domain = sender.split("@")[-1].lower()
+    return SMTP_PROVIDERS.get(domain, SMTP_DEFAULT)
 
 
 def send(report_markdown: str, subject: str = None) -> None:
@@ -56,7 +64,8 @@ def send(report_markdown: str, subject: str = None) -> None:
     msg.attach(MIMEText(report_markdown, "plain", "utf-8"))
     msg.attach(MIMEText(html_content, "html", "utf-8"))
 
-    with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as smtp:
+    smtp_host, smtp_port = _get_smtp_settings(sender)
+    with smtplib.SMTP(smtp_host, smtp_port) as smtp:
         smtp.ehlo()
         smtp.starttls()
         smtp.login(sender, password)
