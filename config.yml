@@ -1,0 +1,141 @@
+llm:
+  provider: "claude"           # "claude" 또는 "openai" 로만 변경하면 전환됨
+  claude_model: "claude-sonnet-4-5"
+  openai_model: "gpt-4o"
+  max_tokens: 4000
+  web_search: true             # Claude는 web_search 툴 사용, OpenAI는 browsing 사용
+
+report:
+  language: "korean"
+  timezone: "Asia/Seoul"
+
+email:
+  subject_prefix: "[보안 주간 리포트]"
+
+sources:
+  jobs:
+    primary_sites:
+      - "wanted.co.kr"
+      - "jumpit.co.kr"
+    web_search_queries:
+      - "site:wanted.co.kr 정보보안 OR 보안관제 OR 침해사고대응"
+      - "site:jumpit.co.kr 정보보안 OR SOC OR SIEM"
+
+  cve:
+    primary_sites:
+      - "nvd.nist.gov"
+      - "krcert.or.kr"
+    web_search_queries:
+      - "site:nvd.nist.gov CVE {year} CVSS 7"
+      - "site:krcert.or.kr 취약점 보안업데이트 {year}"
+
+  news:
+    primary_sites:
+      - "boannews.com"
+      - "bleepingcomputer.com"
+    web_search_queries:
+      - "site:boannews.com 침해사고 OR 랜섬웨어 OR APT"
+      - "site:bleepingcomputer.com ransomware OR data breach"
+
+  ctf:
+    primary_sites:
+      - "ctftime.org"
+      - "dreamhack.io"
+    web_search_queries:
+      - "site:ctftime.org/events CTF this week"
+      - "site:dreamhack.io 대회"
+
+  activities:
+    primary_sites:
+      - "kisa.or.kr"
+      - "cisa.gov"
+    web_search_queries:
+      - "site:kisa.or.kr 공모 OR 훈련 OR 모집 {year}"
+      - "site:cisa.gov exercise OR training {year}"
+
+  tools:
+    primary_sites:
+      - "github.com"
+      - "thedfirreport.com"
+    web_search_queries:
+      - "site:github.com/topics security SIEM OR EDR OR SOAR"
+      - "site:thedfirreport.com {year}"
+
+sections:
+  - id: activities
+    title: "🎯 대외활동 · 공모전 · 대회"
+    priority: 1
+    subsections:
+      - id: blueteam_activities
+        title: "블루팀 / 침해사고대응 / 보안관제 관련"
+        keywords:
+          - "KISA 공모전"
+          - "침해사고대응 훈련"
+          - "보안관제 공모"
+          - "로그분석 대회"
+          - "디지털 포렌식 대회"
+          - "CISA 훈련"
+          - "버그바운티 블루팀"
+      - id: ctf
+        title: "CTF 및 기타 해킹대회"
+        keywords:
+          - "CTFtime 이번주"
+          - "국내 CTF 일정"
+          - "코드게이트"
+          - "드림핵"
+          - "해킹방어대회"
+
+  - id: jobs
+    title: "💼 채용 공고 (정보보안 분야)"
+    priority: 2
+    subsections:
+      - id: blueteam_jobs
+        title: "블루팀 우선"
+        keywords:
+          - "침해사고대응 채용"
+          - "보안관제 채용"
+          - "SOC 채용"
+          - "SIEM 채용"
+          - "위협헌팅 채용"
+          - "디지털포렌식 채용"
+          - "악성코드분석 채용"
+          - "클라우드보안 채용"
+          - "SecOps 채용"
+      - id: other_security_jobs
+        title: "기타 보안 직군"
+        keywords:
+          - "정보보안 채용"
+          - "정보보호 채용"
+          - "사이버보안 채용"
+          - "보안컨설팅 채용"
+          - "모의해킹 채용"
+          - "보안엔지니어 채용"
+          - "CISO 채용"
+          - "시큐어코딩 채용"
+          - "AppSec 채용"
+
+  - id: cve
+    title: "🔥 주요 취약점 & CVE"
+    priority: 3
+    keywords:
+      - "이번주 CVE CVSS 7.0 이상"
+      - "PoC 공개 취약점"
+      - "긴급 보안 패치"
+
+  - id: news
+    title: "📰 보안 뉴스 & 침해사고"
+    priority: 4
+    keywords:
+      - "국내 침해사고"
+      - "랜섬웨어 동향"
+      - "APT 공격"
+      - "보안 정책 변화"
+
+  - id: tools
+    title: "🛠 주목할 도구 & 연구"
+    priority: 5
+    keywords:
+      - "SIEM EDR SOAR 신규 도구"
+      - "위협 인텔리전스"
+      - "포렌식 도구"
+      - "보안 논문 블로그"
