@@ -42,6 +42,31 @@ USER_PROMPT = """날짜: {today} ({week_range}) | 출처 링크 필수, 없으�
 ## 🛠 5. 도구·연구
 검색: {tools_sites} | {tools_queries}
 - SIEM/EDR/SOAR/포렌식 신규도구, 위협인텔·악성코드연구: 제목·요약·링크
+
+## 🔧 6. 주목할 보안 도구 & 신규 릴리즈
+
+아래 사이트를 확인하고 웹 검색으로 보완:
+- https://github.com/trending?since=weekly&q=security
+- https://isc.sans.edu/diary.html
+
+이번 주 새로 출시되거나 업데이트된 보안 도구를 수집해줘.
+SIEM, EDR, SOAR, 포렌식, 위협헌팅 관련 블루팀 도구 우선.
+각 항목: 도구명 | 한 줄 요약 | 링크
+
+---
+
+## 📡 7. 보안 트렌드 & 최신 연구
+
+아래 사이트를 확인하고 웹 검색으로 보완:
+- https://thehackernews.com
+- https://www.bleepingcomputer.com
+- https://isc.sans.edu
+- https://arxiv.org/list/cs.CR/recent
+
+이번 주 보안 업계에서 주목받는 트렌드, 기술 동향, 연구 결과를 수집해줘.
+AI 보안, 클라우드 보안, 제로트러스트, 랜섬웨어 동향 등 포함.
+블루팀 관점에서 실무에 도움되는 내용 위주로.
+각 항목: 제목 | 핵심 내용 한 줄 요약 | 링크
 """
 
 
