@@ -15,46 +15,33 @@ from llm import get_llm
 from notifier import email_sender
 
 
-SYSTEM_PROMPT = """
-당신은 정보보안 분야 전문 리서처입니다.
-웹 검색을 통해 최신 정보를 수집하고, 블루팀/침해사고대응/보안관제에 관심 있는
-보안 전공자 관점에서 주간 리포트를 작성합니다.
-반드시 한국어로 작성하며, 마크다운 형식을 사용합니다.
-각 항목에는 출처 링크를 포함합니다.
-아래에 섹션별로 우선적으로 검색해야 할 사이트와 추천 검색 쿼리가 주어집니다.
-반드시 해당 사이트들을 먼저 확인하고, 없으면 일반 검색으로 보완하세요.
-"""
+SYSTEM_PROMPT = "블루팀 보안 전공자를 위한 주간 리포트를 한국어 마크다운으로 작성하세요. 지정 사이트를 우선 검색하고 각 항목에 출처 링크를 포함하세요."
 
-USER_PROMPT = """
-오늘: {today} | 이번 주: {week_range}
-각 항목에 출처 링크 필수. 정보 없으면 "해당 정보 없음" 표시.
+USER_PROMPT = """날짜: {today} ({week_range}) | 출처 링크 필수, 없으면 "해당 정보 없음"
 
 # 📊 보안 주간 리포트 — {today}
 
 ## 🎯 1. 대외활동·공모전·대회
-사이트: {activities_sites} / 쿼리: {activities_queries}
-- 블루팀/침해사고대응/포렌식: KISA·국가기관 훈련·공모전 (이름, 주최, 마감일, 링크)
-- CTF [{ctf_sites}]: 이번 주 진행·예정 CTF, 국내 CTF 일정 (대회명, 날짜, 링크)
+검색: {activities_sites} | {activities_queries}
+- 블루팀 훈련·공모전: 이름·주최·마감·링크
+- CTF({ctf_sites} | {ctf_queries}): 대회명·날짜·링크
 
-## 💼 2. 채용 공고
-사이트: {jobs_sites} / 쿼리: {jobs_queries}
-- 블루팀(보안관제·SOC·SIEM·포렌식·위협헌팅·악성코드분석): 회사명, 직무, 자격요약, 마감일, 링크
-- 기타(정보보안·모의해킹·AppSec·CISO·시큐어코딩): 동일 형식
+## 💼 2. 채용공고
+검색: {jobs_sites} | {jobs_queries}
+- 블루팀(SOC·SIEM·포렌식·위협헌팅): 회사·직무·자격요약·마감·링크
+- 기타보안(모의해킹·AppSec·CISO): 동일 형식
 
-## 🔥 3. 주요 취약점 & CVE
-사이트: {cve_sites} / 쿼리: {cve_queries}
-- CVSS 7.0↑ CVE, PoC 공개 시 ⚠️ 표시
-- 항목: CVE ID, CVSS, 영향 제품·버전, 조치방법, 링크
+## 🔥 3. CVE
+검색: {cve_sites} | {cve_queries}
+- CVSS 7.0↑, PoC공개 ⚠️: CVE ID·CVSS·영향제품·조치방법·링크
 
-## 📰 4. 보안 뉴스 & 침해사고
-사이트: {news_sites} / 쿼리: {news_queries}
-- 국내외 침해사고 (블루팀 관점: 침입경로·탐지포인트·대응)
-- 랜섬웨어·APT 동향, 보안 정책·규제 변화
+## 📰 4. 보안뉴스
+검색: {news_sites} | {news_queries}
+- 침해사고(침입경로·탐지포인트·대응)·랜섬웨어·APT·정책변화
 
-## 🛠 5. 주목할 도구 & 연구
-사이트: {tools_sites} / 쿼리: {tools_queries}
-- 신규·업데이트 SIEM/EDR/SOAR/포렌식 도구, 위협인텔리전스·악성코드 연구·블로그
-- 항목: 도구명/제목, 한 줄 요약, 링크
+## 🛠 5. 도구·연구
+검색: {tools_sites} | {tools_queries}
+- SIEM/EDR/SOAR/포렌식 신규도구, 위협인텔·악성코드연구: 제목·요약·링크
 """
 
 

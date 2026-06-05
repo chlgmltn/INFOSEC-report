@@ -16,50 +16,38 @@ sources:
   jobs:
     primary_sites:
       - "wanted.co.kr"
-      - "jumpit.co.kr"
     web_search_queries:
       - "site:wanted.co.kr 정보보안 OR 보안관제 OR 침해사고대응"
-      - "site:jumpit.co.kr 정보보안 OR SOC OR SIEM"
 
   cve:
     primary_sites:
       - "nvd.nist.gov"
-      - "krcert.or.kr"
     web_search_queries:
       - "site:nvd.nist.gov CVE {year} CVSS 7"
-      - "site:krcert.or.kr 취약점 보안업데이트 {year}"
 
   news:
     primary_sites:
       - "boannews.com"
-      - "bleepingcomputer.com"
     web_search_queries:
       - "site:boannews.com 침해사고 OR 랜섬웨어 OR APT"
-      - "site:bleepingcomputer.com ransomware OR data breach"
 
   ctf:
     primary_sites:
       - "ctftime.org"
-      - "dreamhack.io"
     web_search_queries:
       - "site:ctftime.org/events CTF this week"
-      - "site:dreamhack.io 대회"
 
   activities:
     primary_sites:
       - "kisa.or.kr"
-      - "cisa.gov"
     web_search_queries:
       - "site:kisa.or.kr 공모 OR 훈련 OR 모집 {year}"
-      - "site:cisa.gov exercise OR training {year}"
 
   tools:
     primary_sites:
       - "github.com"
-      - "thedfirreport.com"
     web_search_queries:
       - "site:github.com/topics security SIEM OR EDR OR SOAR"
-      - "site:thedfirreport.com {year}"
 
 sections:
   - id: activities
